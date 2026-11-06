@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
-
     The path provided below has to start and end with a slash "/" in order for
     it to work correctly.
-
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
@@ -18,19 +15,44 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <meta name="description" content="WakeBreaker — Ertelemeyi imkânsız kılan yeni nesil alarm uygulaması. Ghost Walk, Brain Wake ve Wake Economy ile her sabah disiplinle başla.">
+  <meta name="keywords" content="alarm, uyanış, disiplin, wakebreaker, ghost walk, brain wake, wake economy, sabah rutini">
+  <meta name="author" content="Mert Yasin Yılmaz">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph (Sosyal Medya Önizleme) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="WakeBreaker — No Excuses">
+  <meta property="og:description" content="Ertelemeyi imkânsız kılan yeni nesil alarm uygulaması. Her sabah mazeret yok, sadece sonuç var.">
+  <meta property="og:image" content="icons/Icon-512.png">
+  <meta property="og:url" content="https://soap2647.github.io/wakebreaker_web/">
+  <meta property="og:locale" content="tr_TR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WakeBreaker — No Excuses">
+  <meta name="twitter:description" content="Ertelemeyi imkânsız kılan alarm uygulaması.">
+  <meta name="twitter:image" content="icons/Icon-512.png">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="wakebreaker_web">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WakeBreaker">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>wakebreaker_web</title>
+  <title>WakeBreaker — No Excuses</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    /* Prevents white flash on load */
+    body { background-color: #050505; margin: 0; }
+  </style>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>

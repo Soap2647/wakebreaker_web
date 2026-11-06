@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:math' as math;
+import '../theme/app_colors.dart';
 
 class HeroSection extends StatelessWidget {
   final bool isDesktop;
+  final bool isTurkish;
 
-  const HeroSection({super.key, required this.isDesktop});
+  const HeroSection({super.key, required this.isDesktop, required this.isTurkish});
 
   @override
   Widget build(BuildContext context) {
@@ -43,25 +46,22 @@ class HeroSection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFFD946EF).withOpacity(0.1),
+            color: AppColors.neonPink.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: const Color(0xFFD946EF).withOpacity(0.3)),
+            border: Border.all(color: AppColors.neonPink.withValues(alpha: 0.3)),
             boxShadow: [
-              BoxShadow(
-                color: const Color(0xFFD946EF).withOpacity(0.1),
-                blurRadius: 15,
-              )
-            ]
+              BoxShadow(color: AppColors.neonPink.withValues(alpha: 0.1), blurRadius: 15)
+            ],
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.star_rounded, color: Color(0xFFD946EF), size: 16),
+              const Icon(Icons.star_rounded, color: AppColors.neonPink, size: 16),
               const SizedBox(width: 8),
               Text(
-                "YENİ NESİL ALARM UYGULAMASI",
+                isTurkish ? "YENİ NESİL ALARM UYGULAMASI" : "NEXT-GEN ALARM APP",
                 style: GoogleFonts.outfit(
-                  color: const Color(0xFFD946EF),
+                  color: AppColors.neonPink,
                   fontWeight: FontWeight.bold,
                   fontSize: 12,
                   letterSpacing: 1.5,
@@ -71,19 +71,19 @@ class HeroSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 30),
-        
-        // Massive Headline with Gradient
+
+        // Gradient headline
         ShaderMask(
           shaderCallback: (bounds) => const LinearGradient(
-            colors: [Colors.white, Color(0xFFA480F2)],
+            colors: [Colors.white, AppColors.softPurple],
             begin: Alignment.topCenter,
             end: Alignment.bottomRight,
           ).createShader(bounds),
           child: Text(
-            "Uykuyu Kır.\nGünü İnşa Et.",
+            isTurkish ? "Uykuyu Kır.\nGünü İnşa Et." : "Break the Sleep.\nBuild the Day.",
             textAlign: center ? TextAlign.center : TextAlign.start,
             style: GoogleFonts.outfit(
-              fontSize: isDesktop ? 96 : 64, // Massive size
+              fontSize: isDesktop ? 96 : 64,
               fontWeight: FontWeight.w900,
               height: 1.1,
               color: Colors.white,
@@ -91,28 +91,30 @@ class HeroSection extends StatelessWidget {
             ),
           ),
         ),
-        
+
         const SizedBox(height: 30),
         Text(
-          "WakeBreaker, ertelemeyi imkansız kılan ve sizi %100 uyanık başlatan tek uygulama. Sabahları mazeret yok, sadece sonuç var.",
+          isTurkish
+              ? "WakeBreaker, ertelemeyi imkansız kılan ve sizi %100 uyanık başlatan tek uygulama. Sabahları mazeret yok, sadece sonuç var."
+              : "WakeBreaker is the only app that makes snoozing impossible and gets you 100% awake. No excuses in the morning — only results.",
           textAlign: center ? TextAlign.center : TextAlign.start,
           style: GoogleFonts.outfit(
             fontSize: isDesktop ? 22 : 18,
             color: Colors.white60,
             height: 1.6,
-            fontWeight: FontWeight.w300
+            fontWeight: FontWeight.w300,
           ),
         ),
         const SizedBox(height: 50),
-        
-        // Buttons
+
+        // Store Buttons
         Wrap(
           spacing: 20,
           runSpacing: 20,
           alignment: center ? WrapAlignment.center : WrapAlignment.start,
           children: [
-            _storeButton(FontAwesomeIcons.apple, "App Store", "Coming Soon"),
-            _storeButton(FontAwesomeIcons.googlePlay, "Google Play", "Pre-Register"),
+            _storeButton(FontAwesomeIcons.apple, "App Store",    isTurkish ? "Yakında" : "Coming Soon",   null),
+            _storeButton(FontAwesomeIcons.googlePlay, "Google Play", isTurkish ? "Ön Kayıt" : "Pre-Register", "https://play.google.com"),
           ],
         ),
       ],
@@ -131,29 +133,26 @@ class HeroSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(55),
             border: Border.all(color: const Color(0xFF2A2A2A), width: 8),
             boxShadow: [
-              // Glow behind phone
               BoxShadow(
-                color: const Color(0xFFA480F2).withOpacity(0.4),
+                color: AppColors.softPurple.withValues(alpha: 0.4),
                 blurRadius: 100,
                 spreadRadius: -20,
-                offset: const Offset(0, 0),
               ),
             ],
           ),
           child: Stack(
             children: [
-              // Border Gradient
+              // Screen gradient
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(46),
                   gradient: const LinearGradient(
-                     colors: [Color(0xFF333333), Colors.black],
-                     begin: Alignment.topLeft,
-                     end: Alignment.bottomRight,
-                  )
+                    colors: [Color(0xFF333333), Colors.black],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
                 ),
               ),
-              // Screen
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ClipRRect(
@@ -168,17 +167,9 @@ class HeroSection extends StatelessWidget {
                     ),
                     child: Stack(
                       children: [
-                        // Background Pattern
-                        Positioned.fill(
-                          child: Opacity(
-                            opacity: 0.1,
-                            child: Image.network(
-                              "https://www.transparenttextures.com/patterns/carbon-fibre.png",
-                              repeat: ImageRepeat.repeat,
-                            ),
-                          ),
-                        ),
-                        
+                        // Custom dot pattern background (no external URL)
+                        Positioned.fill(child: CustomPaint(painter: _DotPatternPainter())),
+
                         // Fake UI Elements
                         Positioned(
                           top: 120,
@@ -190,13 +181,13 @@ class HeroSection extends StatelessWidget {
                                 padding: const EdgeInsets.all(30),
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: const Color(0xFFA480F2), width: 2),
+                                  border: Border.all(color: AppColors.softPurple, width: 2),
                                   boxShadow: [
-                                     BoxShadow(
-                                       color: const Color(0xFFA480F2).withOpacity(0.2),
-                                       blurRadius: 30
-                                     )
-                                  ]
+                                    BoxShadow(
+                                      color: AppColors.softPurple.withValues(alpha: 0.25),
+                                      blurRadius: 30,
+                                    )
+                                  ],
                                 ),
                                 child: const Icon(Icons.bolt, size: 60, color: Colors.white),
                               ),
@@ -207,22 +198,22 @@ class HeroSection extends StatelessWidget {
                                   fontSize: 80,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
-                                  letterSpacing: -2
+                                  letterSpacing: -2,
                                 ),
                               ),
                               Text(
                                 "GHOST WALK AKTİF",
                                 style: GoogleFonts.outfit(
-                                  color: const Color(0xFFA480F2),
+                                  color: AppColors.softPurple,
                                   letterSpacing: 4,
                                   fontSize: 14,
-                                  fontWeight: FontWeight.bold
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        
+
                         // Bottom Card
                         Positioned(
                           bottom: 40,
@@ -231,25 +222,22 @@ class HeroSection extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(25),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.05),
+                              color: Colors.white.withValues(alpha: 0.05),
                               borderRadius: BorderRadius.circular(30),
-                              border: Border.all(color: Colors.white.withOpacity(0.05)),
+                              border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
                               boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.5),
-                                  blurRadius: 20,
-                                )
-                              ]
+                                BoxShadow(color: Colors.black.withValues(alpha: 0.5), blurRadius: 20)
+                              ],
                             ),
                             child: Row(
                               children: [
                                 Container(
                                   padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFA480F2).withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(15)
+                                    color: AppColors.softPurple.withValues(alpha: 0.2),
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                  child: const Icon(Icons.directions_walk, color: Color(0xFFA480F2)),
+                                  child: const Icon(Icons.directions_walk, color: AppColors.softPurple),
                                 ),
                                 const SizedBox(width: 20),
                                 Expanded(
@@ -258,14 +246,16 @@ class HeroSection extends StatelessWidget {
                                     children: [
                                       Text("Kalan Mesafe", style: GoogleFonts.outfit(color: Colors.white38, fontSize: 12)),
                                       const SizedBox(height: 4),
-                                      Text("15 Metre", style: GoogleFonts.outfit(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                                      Text("15 Metre",
+                                          style: GoogleFonts.outfit(
+                                              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -294,39 +284,64 @@ class HeroSection extends StatelessWidget {
     );
   }
 
-  Widget _storeButton(IconData icon, String storeName, String status) {
-    return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withOpacity(0.1)),
-          boxShadow: [
-             BoxShadow(
-               color: Colors.black.withOpacity(0.2),
-               blurRadius: 10,
-               offset: const Offset(0, 5),
-             )
-          ]
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            FaIcon(icon, color: Colors.white, size: 28),
-            const SizedBox(width: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(status.toUpperCase(), style: GoogleFonts.outfit(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 1)),
-                Text(storeName, style: GoogleFonts.outfit(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-              ],
-            ),
-          ],
+  Widget _storeButton(IconData icon, String storeName, String status, String? url) {
+    return Tooltip(
+      message: url == null ? (status) : storeName,
+      child: InkWell(
+        onTap: url != null ? () async {
+          final uri = Uri.parse(url);
+          if (!await launchUrl(uri)) throw 'Could not launch $url';
+        } : null,
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.05),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 10, offset: const Offset(0, 5))
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FaIcon(icon, color: Colors.white, size: 28),
+              const SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(status.toUpperCase(),
+                      style: GoogleFonts.outfit(
+                          color: Colors.white38, fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 1)),
+                  Text(storeName,
+                      style: GoogleFonts.outfit(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+}
+
+/// Noktalı arka plan deseni — dış URL'ye gerek yok
+class _DotPatternPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.04)
+      ..style = PaintingStyle.fill;
+    const spacing = 18.0;
+    const radius = 1.2;
+    for (double x = 0; x < size.width; x += spacing) {
+      for (double y = 0; y < size.height; y += spacing) {
+        canvas.drawCircle(Offset(x, y), radius, paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(_DotPatternPainter old) => false;
 }
