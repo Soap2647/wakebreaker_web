@@ -1,11 +1,11 @@
 {
-    "name": "wakebreaker_web",
-    "short_name": "wakebreaker_web",
+    "name": "WakeBreaker",
+    "short_name": "WakeBreaker",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#050505",
+    "theme_color": "#9D4EDD",
+    "description": "WakeBreaker — Ertelemeyi imkânsız kılan yeni nesil alarm uygulaması. No excuses, only results.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

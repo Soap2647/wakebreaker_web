@@ -114,10 +114,10 @@ class FeaturesPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF111111),
         borderRadius: BorderRadius.circular(40),
-        border: Border.all(color: Colors.white.withOpacity(0.05)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFA480F2).withOpacity(0.1),
+            color: const Color(0xFFA480F2).withValues(alpha: 0.1),
             blurRadius: 50,
             offset: const Offset(0, 20),
           ),
@@ -134,7 +134,7 @@ class FeaturesPage extends StatelessWidget {
               style: GoogleFonts.outfit(
                 fontSize: 150,
                 fontWeight: FontWeight.w900,
-                color: Colors.white.withOpacity(0.03),
+                color: Colors.white.withValues(alpha: 0.03),
               ),
             ),
           ),
@@ -143,10 +143,10 @@ class FeaturesPage extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.black,
-              border: Border.all(color: const Color(0xFFA480F2).withOpacity(0.3)),
+              border: Border.all(color: const Color(0xFFA480F2).withValues(alpha: 0.3)),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFFA480F2).withOpacity(0.2),
+                  color: const Color(0xFFA480F2).withValues(alpha: 0.2),
                   blurRadius: 30,
                 )
               ]
@@ -166,7 +166,7 @@ class FeaturesPage extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: const Color(0xFFA480F2).withOpacity(0.1),
+            color: const Color(0xFFA480F2).withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(

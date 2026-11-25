@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'pages/landing_page.dart';
+import 'theme/app_colors.dart';
 
 void main() {
   runApp(const WakeBreakerWeb());
@@ -12,24 +13,35 @@ class WakeBreakerWeb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'WakeBreaker - No Excuses',
+      title: 'WakeBreaker — No Excuses',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFF000000), // Pure Black
+        scaffoldBackgroundColor: AppColors.bgBlack,
         textTheme: GoogleFonts.outfitTextTheme(ThemeData.dark().textTheme),
-        colorScheme: const ColorScheme.dark(
-          primary: Color(0xFFD946EF), // Neon Pink as primary for more pop
-          secondary: Color(0xFFA480F2), // Purple accent
-          surface: Color(0xFF0A0A0A), // Very dark grey, almost black
+        colorScheme: ColorScheme.dark(
+          primary: AppColors.neonPurple,
+          secondary: AppColors.softPurple,
+          surface: AppColors.bgCard,
           onSurface: Colors.white,
         ),
-        // Define default button themes here if needed, or keep it minimal
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFA480F2),
+            backgroundColor: AppColors.neonPurple,
             foregroundColor: Colors.white,
             textStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold),
           ),
+        ),
+        checkboxTheme: CheckboxThemeData(
+          fillColor: WidgetStateProperty.resolveWith((states) =>
+              states.contains(WidgetState.selected) ? AppColors.neonPurple : Colors.transparent),
+        ),
+        tooltipTheme: TooltipThemeData(
+          decoration: BoxDecoration(
+            color: AppColors.bgCard,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: AppColors.neonPurple.withValues(alpha: 0.3)),
+          ),
+          textStyle: GoogleFonts.outfit(color: Colors.white70, fontSize: 12),
         ),
       ),
       home: const LandingPage(),
